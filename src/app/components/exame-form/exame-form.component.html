@@ -19,7 +19,9 @@
     </mat-form-field>
   </div>
 
-  <div class="errorMessage" *ngIf="!isValid">{{exame.label}} is required</div>
+  <div *ngFor="let validation of exame.validations">
+    <mat-error *ngIf="hasErros(exame.key, validation?.validation?.toLowerCase())">{{validation?.message}}</mat-error>
+  </div>
 </div>
 
 

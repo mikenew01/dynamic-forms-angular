@@ -46,8 +46,9 @@ export class ExameService {
         type: 'email',
         placeholder: 'maikoncanuto@gmail.com',
         validations: [
-          {validation: 'email'},
-          {validation: 'minLength', value: 1}
+          {validation: 'email', message: 'Campo inválido, precisa digitar e-mail'},
+          {validation: 'minLength', value: 3, message: 'Necessário preencher o campo.'},
+          {validation: 'maxLength', value: 4, message: 'Caracters máximos 2'},
         ],
         order: 2
       }),

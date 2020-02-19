@@ -9,7 +9,8 @@ export class Campo<T> {
   placeholder: string;
   validations: {
     validation: string,
-    value?: any
+    value?: any,
+    message?: string
   }[];
   options: {
     key: string,
@@ -26,7 +27,7 @@ export class Campo<T> {
     type?: string,
     placeholder?: string;
     options?: {key: string, value: any}[],
-    validations?: {validation: string, value?: any}[]
+    validations?: {validation: string, value?: any, message?: string}[]
   } = {}) {
 
     this.value = options.value;

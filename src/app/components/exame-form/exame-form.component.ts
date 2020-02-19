@@ -21,4 +21,9 @@ export class ExameFormComponent implements OnInit {
     return this.form.controls[this.exame.key].valid;
   }
 
+  private hasErros(controlName: string, errorName: string): any {
+    return this.form.controls[controlName].hasError(errorName);
+  }
+
+
 }
