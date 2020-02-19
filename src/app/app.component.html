@@ -1,9 +1,10 @@
-<div fxLayout="row">
-  <h1>Formulário</h1>
+<mat-card class="mat-elevation-z5">
+  <mat-card-header>
+    <mat-card-title>Formulário</mat-card-title>
+    <mat-card-subtitle>Dynamic Forms</mat-card-subtitle>
+  </mat-card-header>
 
-  <app-exame-container-form
-    [exames]="exames$ | async"
-  >
-
-  </app-exame-container-form>
-</div>
+  <mat-card-content>
+    <app-exame-container-form [exames]="exames$ | async"></app-exame-container-form>
+  </mat-card-content>
+</mat-card>

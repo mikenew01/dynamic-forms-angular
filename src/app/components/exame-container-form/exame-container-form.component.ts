@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ExameService} from "../../service/exame.service";
-import {ExameBase} from "../../model/exame-base.model";
+import {Campo} from "../../model/campo.model";
 import {FormGroup} from "@angular/forms";
 
 @Component({
@@ -10,7 +10,7 @@ import {FormGroup} from "@angular/forms";
 })
 export class ExameContainerFormComponent implements OnInit {
 
-  @Input() exames: ExameBase<string>[] = [];
+  @Input() exames: Campo<string>[] = [];
   form: FormGroup;
   payLoad = '';
 

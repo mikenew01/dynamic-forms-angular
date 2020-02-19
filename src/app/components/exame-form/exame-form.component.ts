@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ExameBase} from "../../model/exame-base.model";
+import {Campo} from "../../model/campo.model";
 import {FormGroup} from "@angular/forms";
 
 @Component({
@@ -9,7 +9,7 @@ import {FormGroup} from "@angular/forms";
 })
 export class ExameFormComponent implements OnInit {
 
-  @Input() exame: ExameBase<string>;
+  @Input() exame: Campo<string>;
   @Input() form: FormGroup;
 
   constructor() { }

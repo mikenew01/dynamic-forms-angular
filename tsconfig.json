@@ -1,5 +1,9 @@
 {
   "compileOnSave": false,
+  "angularCompilerOptions": {
+    "enabledIvy": true,
+    "allowEmptyCodegenFiles": true
+  },
   "compilerOptions": {
     "baseUrl": "./",
     "downlevelIteration": true,

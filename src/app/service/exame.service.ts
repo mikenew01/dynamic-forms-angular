@@ -1,55 +1,78 @@
-import { Injectable } from '@angular/core';
-import {ExameBase} from "../model/exame-base.model";
-import {FormControl, FormGroup} from "@angular/forms";
-import {Observable, of} from "rxjs";
-import {ExameDropdown} from "../model/exame-dropdown.model";
-import {ExameText} from "../model/exame-text.model";
+import {Injectable} from '@angular/core';
+import {Campo} from "../model/campo.model";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {of} from "rxjs";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExameService {
 
-  constructor() { }
+  constructor() {
+  }
 
-  toFromGroup(exames: ExameBase<string>[]) {
+  toFromGroup(exames: Campo<string>[]) {
     let group: any = {};
 
     exames.forEach(obj => {
-      group[obj.key] = new FormControl(obj.value || '', []);
+      group[obj.key] = new FormControl(obj.value || '', this.toValidation(obj.validations) || []);
     });
+
 
     return new FormGroup(group);
   }
 
-  getExames() {
-    let exames: ExameBase<string>[] = [
-      new ExameDropdown({
-        key: 'veiculo',
-        label: 'Tipo Veiculo',
-        controlType: 'dropdown',
-        options: [
-          {order: 1, key: 'Componente', value: 'componente'},
-          {order: 2, key: 'Programa', value: 'programa'}
-        ],
-        order: 3
-      }),
+  private toValidation(validationObject: { validation: string, value?: any }[] = []): any {
+    return validationObject.map(validation => {
+      switch (validation.validation) {
+        case 'min': return Validators.min(validation.value as number);
+        case 'max': return Validators.max(validation.value as number);
+        case 'required': return Validators.required;
+        case 'email': return Validators.email;
+        case 'minLength': return Validators.minLength(validation.value as number);
+        case 'maxLength': return Validators.maxLength(validation.value as number);
+      }
+    });
+  }
 
-      new ExameText({
+  getExames() {
+    let exames: Campo<string>[] = [
+      new Campo({
         controlType: 'text',
         key: 'emailPessoa',
+        value: 'maikoncanuto@gmail.com',
         label: 'E-mail',
         type: 'email',
-        order: 1
+        placeholder: 'maikoncanuto@gmail.com',
+        validations: [
+          {validation: 'email'},
+          {validation: 'minLength', value: 1}
+        ],
+        order: 2
       }),
 
-      new ExameText({
+      new Campo({
         controlType: 'text',
         key: 'nome',
         label: 'Nome Completo',
         type: 'text',
-        order: 2
-      })
+        placeholder: 'Maikon Canuto',
+        order: 1
+      }),
+
+      new Campo({
+        controlType: 'dropdown',
+        key: 'sexo',
+        label: 'Sexo',
+        type: 'dropdown',
+        placeholder: 'Selecione o Sexo',
+        order: 3,
+        options: [
+          {key: 'Homem', value: 'M'},
+          {key: 'Mulher', value: 'F'}
+        ]
+      }),
     ];
 
     return of(exames.sort((a, b) => a.order - b.order));

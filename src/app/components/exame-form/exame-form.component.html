@@ -1,16 +1,26 @@
 <div [formGroup]="form">
-  <label [attr.for]="exame.key">{{exame.label}}</label>
-
   <div [ngSwitch]="exame.controlType">
+    <mat-form-field *ngSwitchCase="'text'">
+      <mat-label [attr.for]="exame.key">{{exame.label}}</mat-label>
+      <input matInput
+             [placeholder]="exame.placeholder"
+             [formControlName]="exame.key"
+             [id]="exame.key"
+             [type]="exame.type">
+    </mat-form-field>
 
-    <input *ngSwitchCase="'text'" [formControlName]="exame.key"
-           [id]="exame.key" [type]="exame.type">
-
-    <select [id]="exame.key" *ngSwitchCase="'dropdown'" [formControlName]="exame.key">
-      <option *ngFor="let opt of exame.options" [value]="opt.key">{{opt.value}}</option>
-    </select>
-
+    <mat-form-field *ngSwitchCase="'dropdown'">
+      <mat-label>{{exame.label}}</mat-label>
+      <mat-select [id]="exame.key"
+                  [formControlName]="exame.key" >
+        <mat-option>Selecione</mat-option>
+        <mat-option *ngFor="let opt of exame.options" [value]="opt.value">{{opt.key}}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 
   <div class="errorMessage" *ngIf="!isValid">{{exame.label}} is required</div>
 </div>
+
+
+

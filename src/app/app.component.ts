@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {ExameService} from "./service/exame.service";
 import {Observable} from "rxjs";
-import {ExameBase} from "./model/exame-base.model";
+import {Campo} from "./model/campo.model";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ import {ExameBase} from "./model/exame-base.model";
 })
 export class AppComponent {
 
-  exames$: Observable<ExameBase<any>[]>;
+  exames$: Observable<Campo<any>[]>;
 
   constructor(exameService: ExameService) {
     this.exames$ = exameService.getExames();
